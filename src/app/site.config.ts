@@ -13,6 +13,7 @@ export interface ProjectDetail {
   slug: string;
   title: string;
   description: string;
+  icon?: string;
   longDescription?: string[];
   links?: { label: string; url: string }[];
 }
