@@ -1,0 +1,65 @@
+<section id="about" class="section">
+  <div class="container-custom">
+
+    @if (config.about.imagePath) {
+      <!-- Two-column layout when an image is provided -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="flex justify-center">
+          <div class="rounded-2xl bg-gradient-accent p-0.5 shadow-glow-lg max-w-sm w-full">
+            <div class="rounded-2xl bg-secondary overflow-hidden">
+              <img [src]="config.about.imagePath"
+                   [alt]="config.business.name"
+                   class="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div>
+            <span class="block font-mono text-accent/70 text-sm tracking-widest uppercase">Our Story</span>
+            <h2 class="section-title mt-3">{{ config.about.heading }}</h2>
+          </div>
+          @for (para of config.about.paragraphs; track $index) {
+            <p class="text-text-secondary leading-relaxed">{{ para }}</p>
+          }
+          @if (config.about.highlights.length > 0) {
+            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-accent/10">
+              @for (hl of config.about.highlights; track hl.label) {
+                <div class="text-center">
+                  <p class="text-3xl font-bold gradient-text">{{ hl.value }}</p>
+                  <p class="text-text-secondary text-sm mt-1">{{ hl.label }}</p>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+      </div>
+    } @else {
+      <!-- Single-column centered layout when no image -->
+      <div class="max-w-3xl mx-auto">
+        <div class="mb-10">
+          <span class="block font-mono text-accent/70 text-sm tracking-widest uppercase">Our Story</span>
+          <h2 class="section-title mt-3">{{ config.about.heading }}</h2>
+        </div>
+        <div class="space-y-5">
+          @for (para of config.about.paragraphs; track $index) {
+            <p class="text-text-secondary leading-relaxed text-lg">{{ para }}</p>
+          }
+        </div>
+        @if (config.about.highlights.length > 0) {
+          <div class="grid grid-cols-3 gap-8 mt-12 pt-10 border-t border-accent/10">
+            @for (hl of config.about.highlights; track hl.label) {
+              <div class="text-center">
+                <p class="text-4xl font-bold gradient-text">{{ hl.value }}</p>
+                <p class="text-text-secondary text-sm mt-2">{{ hl.label }}</p>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</section>

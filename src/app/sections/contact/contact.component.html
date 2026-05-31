@@ -1,0 +1,125 @@
+<section id="contact" class="section bg-secondary/20">
+  <div class="container-custom">
+
+    <div class="text-center mb-16">
+      <span class="block font-mono text-accent/70 text-sm tracking-widest uppercase">Let's talk</span>
+      <h2 class="section-title mt-3">{{ config.contact.heading }}</h2>
+      <p class="text-text-secondary mt-4 max-w-xl mx-auto">{{ config.contact.subheading }}</p>
+    </div>
+
+    <div class="max-w-2xl mx-auto">
+
+      @if (submitted()) {
+        <!-- Success state -->
+        <div class="card text-center py-14">
+          <div class="text-6xl mb-5 select-none">✅</div>
+          <h3 class="text-2xl font-bold text-text-primary mb-2">Message Sent!</h3>
+          <p class="text-text-secondary mb-6">
+            Thanks for reaching out. We'll get back to you shortly.
+          </p>
+          <button (click)="submitted.set(false)" class="btn btn-secondary">
+            Send Another
+          </button>
+        </div>
+      } @else {
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="form" class="card space-y-6" novalidate>
+
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-text-secondary mb-2">
+              Name <span class="text-accent">*</span>
+            </label>
+            <input id="name"
+                   type="text"
+                   formControlName="name"
+                   placeholder="Jane Smith"
+                   autocomplete="name"
+                   class="form-input"
+                   [class.border-red-500]="fieldInvalid('name')" />
+            @if (fieldInvalid('name')) {
+              <p class="text-red-400 text-xs mt-1">Name is required.</p>
+            }
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-text-secondary mb-2">
+              Email <span class="text-accent">*</span>
+            </label>
+            <input id="email"
+                   type="email"
+                   formControlName="email"
+                   placeholder="jane@example.com"
+                   autocomplete="email"
+                   class="form-input"
+                   [class.border-red-500]="fieldInvalid('email')" />
+            @if (fieldInvalid('email')) {
+              <p class="text-red-400 text-xs mt-1">A valid email address is required.</p>
+            }
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-text-secondary mb-2">
+              Message <span class="text-accent">*</span>
+            </label>
+            <textarea id="message"
+                      formControlName="message"
+                      rows="5"
+                      placeholder="Tell us about your project or question..."
+                      class="form-input resize-none"
+                      [class.border-red-500]="fieldInvalid('message')"></textarea>
+            @if (fieldInvalid('message')) {
+              <p class="text-red-400 text-xs mt-1">Message must be at least 10 characters.</p>
+            }
+          </div>
+
+          <!-- Error banner -->
+          @if (submitError()) {
+            <p class="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3">
+              Something went wrong. Please try again or email us directly at
+              @if (config.social.email) {
+                <a [href]="'mailto:' + config.social.email" class="text-accent underline">
+                  {{ config.social.email }}</a>.
+              }
+            </p>
+          }
+
+          <!-- Submit button -->
+          <button type="submit"
+                  class="btn btn-primary w-full text-base"
+                  [disabled]="isSubmitting()">
+            @if (isSubmitting()) {
+              <span class="flex items-center justify-center gap-2">
+                <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10"
+                          stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                Sending…
+              </span>
+            } @else {
+              Send Message
+            }
+          </button>
+
+          <!-- Formspree hint when not configured -->
+          @if (!config.contact.formspreeId) {
+            <p class="text-text-muted text-xs text-center leading-relaxed">
+              No Formspree ID set — submit will open your mail client.
+              <a href="https://formspree.io" target="_blank" rel="noopener noreferrer"
+                 class="text-accent/80 hover:text-accent">
+                Set up Formspree
+              </a>
+              for in-browser submission.
+            </p>
+          }
+
+        </form>
+      }
+
+    </div>
+  </div>
+</section>

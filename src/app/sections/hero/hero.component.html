@@ -1,0 +1,40 @@
+<section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+
+  <!-- Retro grid background -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
+       style="background-image: linear-gradient(rgba(0,217,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,217,255,1) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+
+  <!-- Radial glow -->
+  <div class="absolute inset-0 pointer-events-none"
+       style="background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,217,255,0.06) 0%, transparent 70%);">
+  </div>
+
+  <div class="container-custom text-center relative z-10 py-20">
+
+    <!-- Terminal-style label -->
+    <p class="font-mono text-accent/70 text-sm tracking-widest uppercase mb-6 animate-fade-in">
+      <span class="text-accent/40">~/</span> welcome
+    </p>
+
+    <h1 class="gradient-text mb-6 animate-slide-up">
+      {{ config.hero.headline }}
+    </h1>
+
+    <p class="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-slide-up">
+      {{ config.hero.subheadline }}
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+      <a href="#{{ config.hero.ctaFragment }}" class="btn btn-primary text-base">
+        {{ config.hero.ctaLabel }}
+      </a>
+      @if (config.hero.secondaryCtaLabel) {
+        <a href="#{{ config.hero.secondaryCtaFragment }}" class="btn btn-secondary text-base">
+          {{ config.hero.secondaryCtaLabel }}
+        </a>
+      }
+    </div>
+
+  </div>
+</section>

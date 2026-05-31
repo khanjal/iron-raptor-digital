@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="container-custom">
+    @if (!project) {
+      <div class="card">
+        <h3 class="text-xl font-bold">Project not found</h3>
+        <p class="text-text-secondary">Return to the <a routerLink="/projects">projects list</a>.</p>
+      </div>
+    } @else {
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold">{{ project.title }}</h1>
+        <p class="text-text-secondary mt-2">{{ project.description }}</p>
+      </div>
+      <a routerLink="/projects" class="btn btn-ghost">Back to projects</a>
+    }
+  </div>
+</section>
