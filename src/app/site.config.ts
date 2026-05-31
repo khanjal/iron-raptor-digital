@@ -142,8 +142,8 @@ export const SITE_CONFIG: SiteConfig = {
   about: {
     heading: 'About Iron Raptor Digital',
     paragraphs: [
-      'Iron Raptor Digital is a small team of developers working with the latest web technologies. We\'ve shipped Alexa skills, web applications, and tools used by real people.',
-      'We also work with building, upgrading, and maintaining computer systems and networks. Got an idea? Let\'s build it.',
+      'Iron Raptor Digital is a small team of developers that work with the latest web technologies. We also work with building, upgrading, and maintaining computer systems and networks.',
+      'Got an idea? Let\'s build it. We\'ve shipped Alexa skills, web applications, and tools used by real people.',
     ],
     highlights: [
       { value: '4+', label: 'Alexa Skills'  },
