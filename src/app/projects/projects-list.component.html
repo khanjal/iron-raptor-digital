@@ -9,7 +9,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       @if (config.projects && config.projects.length) {
         @for (proj of config.projects; track proj.slug) {
-          <div class="card cursor-pointer" (click)="open(proj.title)">
+          <div class="card">
             <div class="text-4xl mb-2 select-none">{{ proj.icon || '🧩' }}</div>
             <h3 class="text-xl font-bold">{{ proj.title }}</h3>
             <p class="text-text-secondary mt-2">{{ proj.description }}</p>
@@ -17,7 +17,7 @@
         }
       } @else {
         @for (proj of config.services; track proj.title) {
-          <div class="card cursor-pointer" (click)="open(proj.title)">
+          <div class="card">
             <div class="text-4xl mb-2 select-none">{{ proj.icon }}</div>
             <h3 class="text-xl font-bold">{{ proj.title }}</h3>
             <p class="text-text-secondary mt-2">{{ proj.description }}</p>
