@@ -90,6 +90,7 @@ export interface SiteConfig {
      */
     formspreeId: string | null;
   };
+  projects?: ProjectDetail[];
 }
 
 export const SITE_CONFIG: SiteConfig = {
