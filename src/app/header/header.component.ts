@@ -21,16 +21,18 @@ export class HeaderComponent {
     this.mobileOpen = !this.mobileOpen;
   }
 
-  mobileNavigate(event: Event, fragment: string) {
+  mobileNavigate(event: Event, fragmentOrPath: string) {
     event.preventDefault();
     event.stopPropagation();
     this.mobileOpen = false;
 
-    if (fragment === 'projects') {
-      setTimeout(() => this.router.navigate(['/projects']), 80);
+    // If this looks like a route path, navigate; otherwise scroll to fragment
+    if (fragmentOrPath && fragmentOrPath.startsWith('/')) {
+      setTimeout(() => this.router.navigate([fragmentOrPath]), 80);
       return;
     }
 
+    const fragment = fragmentOrPath;
     setTimeout(() => {
       const el = document.getElementById(fragment);
       if (!el) return;

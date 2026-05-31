@@ -6,6 +6,15 @@
 export interface NavItem {
   label: string;
   fragment: string;
+  path?: string;
+}
+
+export interface ProjectDetail {
+  slug: string;
+  title: string;
+  description: string;
+  longDescription?: string[];
+  links?: { label: string; url: string }[];
 }
 
 export interface Service {
@@ -94,9 +103,8 @@ export const SITE_CONFIG: SiteConfig = {
 
   // ── Navigation (fragment maps to a section id on the home page) ───────────
   nav: [
-    { label: 'Projects', fragment: 'services' },
-    { label: 'About',    fragment: 'about'    },
-    { label: 'Contact',  fragment: 'contact'  },
+    { label: 'Projects', fragment: 'services', path: '/projects' },
+    { label: 'About',    fragment: 'about' },
   ],
 
   // ── Social / contact ───────────────────────────────────────────────────────
@@ -159,6 +167,31 @@ export const SITE_CONFIG: SiteConfig = {
     googleReviewsUrl: null,
     items:            [],
   },
+
+  // Rich projects metadata (used on /projects list and detail pages)
+  projects: [
+    {
+      slug: 'raptor-panel',
+      title: 'Raptor Panel',
+      description: 'Server management and control panel used for our game servers.',
+      longDescription: [
+        'Raptor Panel is an internal tool used to manage server instances, perform backups, and view uptime metrics.',
+        'It includes user roles, scheduled tasks, and integrations for remote console access.',
+      ],
+      links: [
+        { label: 'Repo / Docs', url: '#' }
+      ],
+    },
+    {
+      slug: 'pgt-customer-portal',
+      title: 'PGT Customer Portal',
+      description: 'A customer portal for PGT that exposes account data and reports.',
+      longDescription: [
+        'PGT Customer Portal is a web application that provides account management, reporting dashboards, and file uploads for customers.',
+      ],
+      links: [],
+    },
+  ],
 
   // ── Contact section ────────────────────────────────────────────────────────
   contact: {

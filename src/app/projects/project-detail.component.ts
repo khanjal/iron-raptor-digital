@@ -19,6 +19,8 @@ export class ProjectDetailComponent {
     const raw = this.route.snapshot.paramMap.get('id') || '';
     const id = decodeURIComponent(raw);
     const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
-    this.project = this.config.services.find((p: any) => slug(p.title) === id) || null;
+    this.project = (this.config.projects || []).find((p: any) => p.slug === id)
+      || this.config.services.find((p: any) => slug(p.title) === id)
+      || null;
   }
 }

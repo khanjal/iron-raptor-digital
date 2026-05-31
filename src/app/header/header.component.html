@@ -10,8 +10,8 @@
       <!-- Desktop Nav + actions -->
       <div class="hidden md:flex gap-8 items-center">
         @for (item of config.nav; track item.fragment) {
-          @if (item.fragment === 'projects') {
-            <a routerLink="/projects" class="text-secondary hover:text-accent font-medium transition-colors">
+          @if (item.path) {
+            <a [routerLink]="item.path" class="text-secondary hover:text-accent font-medium transition-colors">
               {{ item.label }}
             </a>
           } @else {
@@ -114,11 +114,19 @@
       <div (click)="$event.stopPropagation()" class="md:hidden mt-4 border-t border-soft pt-4">
         <div class="flex flex-col gap-4">
           @for (item of config.nav; track item.fragment) {
-            <a (click)="mobileNavigate($event, item.fragment)"
-               href="#{{ item.fragment }}"
-               class="text-secondary hover:text-accent transition-colors font-medium">
-              {{ item.label }}
-            </a>
+            @if (item.path) {
+              <a (click)="mobileNavigate($event, item.path)"
+                 href="{{ item.path }}"
+                 class="text-secondary hover:text-accent transition-colors font-medium">
+                {{ item.label }}
+              </a>
+            } @else {
+              <a (click)="mobileNavigate($event, item.fragment)"
+                 href="#{{ item.fragment }}"
+                 class="text-secondary hover:text-accent transition-colors font-medium">
+                {{ item.label }}
+              </a>
+            }
           }
           @if (config.social.email) {
             <div class="pt-3 border-t border-soft">
