@@ -1,10 +1,10 @@
-# ng-biz-starter
+# Iron Raptor Digital - Company Website
 
-An Angular 21 + Tailwind CSS skeleton for quickly spinning up simple business websites hosted on GitHub Pages.
+The official company website for Iron Raptor Digital, built with Angular and Tailwind CSS.
 
 ## Stack
 
-- **Angular 21** — standalone components, new `@if`/`@for` control flow
+- **Angular** — standalone components, new `@if`/`@for` control flow
 - **Tailwind CSS 3** — dark retro theme, mobile-first
 - **SCSS** — per-component style files ready to extend
 - **Formspree** — serverless contact form (optional, free tier available)

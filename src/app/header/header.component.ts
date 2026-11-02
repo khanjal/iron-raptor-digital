@@ -1,4 +1,5 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, OnDestroy, inject, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { SITE_CONFIG } from '../site.config';
 import { ThemeService } from '../shared/services/theme.service';
 import { Router, RouterLink } from '@angular/router';
@@ -10,33 +11,40 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   config = SITE_CONFIG;
-  mobileOpen = false;
+  mobileOpen = signal(false);
 
   theme = inject(ThemeService);
   private router = inject(Router);
+  private doc = inject(DOCUMENT);
+  private navTimer: ReturnType<typeof setTimeout> | null = null;
+
+  ngOnDestroy(): void {
+    if (this.navTimer) clearTimeout(this.navTimer);
+  }
 
   toggleMobile() {
-    this.mobileOpen = !this.mobileOpen;
+    this.mobileOpen.set(!this.mobileOpen());
   }
 
   mobileNavigate(event: Event, fragmentOrPath: string) {
     event.preventDefault();
     event.stopPropagation();
-    this.mobileOpen = false;
+    this.mobileOpen.set(false);
 
-    // If this looks like a route path, navigate; otherwise scroll to fragment
+    if (this.navTimer) clearTimeout(this.navTimer);
+
     if (fragmentOrPath && fragmentOrPath.startsWith('/')) {
-      setTimeout(() => this.router.navigate([fragmentOrPath]), 80);
+      this.navTimer = setTimeout(() => this.router.navigate([fragmentOrPath]), 80);
       return;
     }
 
     const fragment = fragmentOrPath;
-    setTimeout(() => {
-      const el = document.getElementById(fragment);
+    this.navTimer = setTimeout(() => {
+      const el = this.doc.getElementById(fragment);
       if (!el) return;
-      const headerEl = document.querySelector('header') as HTMLElement | null;
+      const headerEl = this.doc.querySelector('header') as HTMLElement | null;
       const headerOffset = headerEl ? headerEl.offsetHeight : 64;
       const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
       window.scrollTo({ top, behavior: 'smooth' });
@@ -46,8 +54,8 @@ export class HeaderComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(_event: Event) {
-    if (this.mobileOpen) {
-      this.mobileOpen = false;
+    if (this.mobileOpen()) {
+      this.mobileOpen.set(false);
     }
   }
 }
