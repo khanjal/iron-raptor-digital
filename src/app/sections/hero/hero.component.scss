@@ -1,1 +1,16 @@
-// Hero-specific overrides go here
+.hero-grid {
+  background-image:
+    linear-gradient(rgb(var(--line) / 0.7) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--line) / 0.7) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 30% 30%, #000 0%, transparent 75%);
+}
+
+// Syntax colors for the code window
+.code-k { color: rgb(var(--accent)); }
+.code-t { color: rgb(var(--ink)); font-weight: 500; }
+.code-f { color: rgb(var(--ink)); }
+.code-s { color: #16a34a; }
+.code-c { color: rgb(var(--ink-muted)); font-style: italic; }
+
+:host-context(html.theme-dark) .code-s { color: #4ade80; }

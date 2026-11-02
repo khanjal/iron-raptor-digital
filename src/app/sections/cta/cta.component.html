@@ -1,0 +1,18 @@
+<section id="contact" class="section">
+  <div class="container-custom">
+    <div class="relative overflow-hidden rounded-2xl border border-line bg-surface px-6 py-14 text-center shadow-soft md:px-16 md:py-20">
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-accent" aria-hidden="true"></div>
+      <h2 class="section-title">{{ config.cta.heading }}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">{{ config.cta.body }}</p>
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <a [href]="config.cta.action.url" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          {{ config.cta.action.label }}
+          <app-icon name="arrow" class="h-4 w-4" />
+        </a>
+        @if (config.social.email) {
+          <a [href]="'mailto:' + config.social.email" class="btn-secondary">{{ config.social.email }}</a>
+        }
+      </div>
+    </div>
+  </div>
+</section>

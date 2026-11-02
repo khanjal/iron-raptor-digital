@@ -1,0 +1,29 @@
+<section id="approach" class="section">
+  <div class="container-custom">
+
+    <div class="max-w-2xl">
+      <p class="eyebrow">How we work</p>
+      <h2 class="section-title mt-4">Practical from the first conversation.</h2>
+    </div>
+
+    <ol class="mt-14 grid gap-10 md:grid-cols-3">
+      @for (step of config.approach; track step.title; let i = $index) {
+        <li class="border-t-2 border-accent pt-6">
+          <span class="font-mono text-sm text-accent">0{{ i + 1 }}</span>
+          <h3 class="mt-3 text-lg">{{ step.title }}</h3>
+          <p class="mt-2 leading-relaxed text-ink-soft">{{ step.description }}</p>
+        </li>
+      }
+    </ol>
+
+    <div class="mt-20 rounded-xl border border-line bg-surface p-6 md:p-8">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">Technologies we work with</p>
+      <ul class="mt-5 flex flex-wrap gap-2">
+        @for (tech of config.stack; track tech) {
+          <li class="rounded-md border border-line bg-surface-2 px-3 py-1.5 text-sm font-medium text-ink-soft">{{ tech }}</li>
+        }
+      </ul>
+    </div>
+
+  </div>
+</section>

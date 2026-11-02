@@ -1,30 +1,75 @@
-<section class="section">
+<section class="border-b border-line pt-32 pb-16 md:pt-40 md:pb-20">
   <div class="container-custom">
-
-    <div class="text-center mb-8">
-      <span class="block font-mono text-accent/70 text-sm tracking-widest uppercase">Projects</span>
-      <h2 class="section-title mt-3">Projects</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      @if (config.projects && config.projects.length) {
-        @for (proj of config.projects; track proj.slug) {
-          <div class="card">
-            <div class="text-4xl mb-2 select-none">{{ proj.icon || '🧩' }}</div>
-            <h3 class="text-xl font-bold">{{ proj.title }}</h3>
-            <p class="text-text-secondary mt-2">{{ proj.description }}</p>
-          </div>
-        }
-      } @else {
-        @for (proj of config.services; track proj.title) {
-          <div class="card">
-            <div class="text-4xl mb-2 select-none">{{ proj.icon }}</div>
-            <h3 class="text-xl font-bold">{{ proj.title }}</h3>
-            <p class="text-text-secondary mt-2">{{ proj.description }}</p>
-          </div>
-        }
-      }
-    </div>
-
+    <p class="eyebrow">Our work</p>
+    <h1 class="mt-5 text-display-md">Projects</h1>
+    <p class="section-lead">
+      Products we build and run ourselves, alongside work for clients.
+    </p>
   </div>
 </section>
+
+<section class="section">
+  <div class="container-custom space-y-8">
+    @for (project of config.projects; track project.slug) {
+      <article [id]="project.slug" class="card grid gap-10 p-6 md:p-10 lg:grid-cols-[1.3fr_1fr]">
+
+        <div>
+          <div class="flex items-center gap-4">
+            <div class="icon-tile">
+              <app-icon [name]="project.icon" class="h-6 w-6" />
+            </div>
+            <div>
+              <h2 class="text-2xl">{{ project.name }}</h2>
+              <p class="font-mono text-xs text-ink-muted">{{ project.kind }}</p>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            @for (para of project.description; track $index) {
+              <p class="leading-relaxed text-ink-soft">{{ para }}</p>
+            }
+          </div>
+
+          @if (project.links.length) {
+            <div class="mt-8 flex flex-wrap gap-3">
+              @for (link of project.links; track link.url; let first = $first) {
+                <a [href]="link.url" target="_blank" rel="noopener noreferrer"
+                   [class]="first ? 'btn-primary' : 'btn-secondary'">
+                  {{ link.label }}
+                  <app-icon name="external" class="h-4 w-4" />
+                </a>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="space-y-8 lg:border-l lg:border-line lg:pl-10">
+          @if (project.features?.length) {
+            <div>
+              <h3 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">Highlights</h3>
+              <ul class="mt-4 space-y-3">
+                @for (feature of project.features; track feature) {
+                  <li class="flex gap-3 text-sm leading-relaxed text-ink-soft">
+                    <app-icon name="check" class="mt-0.5 h-4 w-4 text-accent" />
+                    {{ feature }}
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+          <div>
+            <h3 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">Built with</h3>
+            <div class="mt-4 flex flex-wrap gap-2">
+              @for (tag of project.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+          </div>
+        </div>
+
+      </article>
+    }
+  </div>
+</section>
+
+<app-cta />

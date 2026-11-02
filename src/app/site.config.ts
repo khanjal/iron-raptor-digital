@@ -3,23 +3,26 @@
 // Edit this file to customize your entire site. All content is driven from here.
 // =============================================================================
 
+import { IconName } from './shared/icon/icon.component';
+
 export interface NavItem {
   label: string;
-  fragment: string;
-  path?: string;
+  path: string;        // Route, e.g. '/' or '/projects'
+  fragment?: string;   // Section id on that route
 }
 
-export interface ProjectDetail {
-  slug: string;
-  title: string;
-  description: string;
-  icon?: string;
-  longDescription?: string[];
-  links?: { label: string; url: string }[];
+export interface Link {
+  label: string;
+  url: string;
 }
 
 export interface Service {
-  icon: string;     // Any emoji, or swap for an SVG path in the template
+  icon: IconName;
+  title: string;
+  description: string;
+}
+
+export interface Step {
   title: string;
   description: string;
 }
@@ -29,176 +32,241 @@ export interface Highlight {
   label: string;
 }
 
-export interface Testimonial {
+export interface Project {
+  slug: string;
   name: string;
-  role: string | null;   // e.g. 'Owner, Acme Co.' — set null to omit
-  quote: string;
-  rating: number;        // 1–5 stars
-  avatarUrl: string | null; // URL or path inside public/, null for initials fallback
+  kind: string;          // Short label, e.g. 'Web application'
+  icon: IconName;
+  summary: string;       // One line, used on the home page
+  description: string[]; // Paragraphs, used on /projects
+  features?: string[];
+  tags: string[];
+  links: Link[];
+  featured?: boolean;    // Shown on the home page
 }
 
 export interface SocialLinks {
   email: string | null;
-  phone: string | null;
-  linkedin: string | null;   // Full URL  e.g. 'https://linkedin.com/company/acme'
-  github: string | null;     // Full URL  e.g. 'https://github.com/acme'
-  instagram: string | null;  // Full URL  e.g. 'https://instagram.com/acme'
-  facebook: string | null;   // Full URL  e.g. 'https://facebook.com/acme'
+  linkedin: string | null;
+  github: string | null;
 }
 
 export interface SiteConfig {
   business: {
     name: string;
+    legalName: string;
     tagline: string;
-    year: number;
+    description: string;
+    founded: number;
+    location: string;
   };
   nav: NavItem[];
   social: SocialLinks;
   hero: {
+    eyebrow: string;
     headline: string;
     subheadline: string;
-    ctaLabel: string;
-    ctaFragment: string;
-    secondaryCtaLabel: string | null;
-    secondaryCtaFragment: string | null;
+    primaryCta: Link;
+    secondaryCta: NavItem;
   };
   services: Service[];
+  approach: Step[];
+  stack: string[];
   about: {
     heading: string;
     paragraphs: string[];
     highlights: Highlight[];
-    imagePath: string | null; // Path inside public/, e.g. 'about.jpg'
   };
-  testimonials: {
+  cta: {
     heading: string;
-    items: Testimonial[];
-    /**
-     * Link to your Google Business Profile reviews page.
-     * e.g. 'https://g.page/r/YOUR_PLACE_ID/review'
-     * Set to null to hide the "See all reviews" button.
-     */
-    googleReviewsUrl: string | null;
+    body: string;
+    action: Link;
   };
-  contact: {
-    heading: string;
-    subheading: string;
-    /**
-     * Formspree form ID for serverless email delivery.
-     * 1. Sign up free at https://formspree.io
-     * 2. Create a new form and copy the ID (e.g. 'xpwzdzzl')
-     * 3. Paste it here.
-     * If null, clicking Submit opens the visitor's mail client instead.
-     */
-    formspreeId: string | null;
-  };
-  projects?: ProjectDetail[];
+  projects: Project[];
 }
+
+const LINKEDIN = 'https://www.linkedin.com/company/iron-raptor-digital';
+const GITHUB   = 'https://github.com/khanjal';
 
 export const SITE_CONFIG: SiteConfig = {
 
   // ── Business identity ──────────────────────────────────────────────────────
   business: {
-    name:    'Iron Raptor Digital',
-    tagline: 'Building things with the web.',
-    year:    2017,
+    name:        'Iron Raptor Digital',
+    legalName:   'Iron Raptor Digital, LLC',
+    tagline:     'Custom software. Practical solutions. Built to last.',
+    description: 'Custom software and web applications that solve real business problems.',
+    founded:     2013,
+    location:    'New Castle, PA',
   },
 
-  // ── Navigation (fragment maps to a section id on the home page) ───────────
+  // ── Navigation ─────────────────────────────────────────────────────────────
   nav: [
-    { label: 'Projects', fragment: 'services', path: '/projects' },
-    { label: 'About',    fragment: 'about' },
+    { label: 'Services', path: '/', fragment: 'services' },
+    { label: 'Work',     path: '/projects' },
+    { label: 'Approach', path: '/', fragment: 'approach' },
+    { label: 'About',    path: '/', fragment: 'about' },
   ],
 
   // ── Social / contact ───────────────────────────────────────────────────────
   social: {
-    email:     null,
-    phone:     null,
-    linkedin:  'https://www.linkedin.com/company/iron-raptor-digital',
-    github:    null,
-    instagram: null,
-    facebook:  null,
+    email:    null,
+    linkedin: LINKEDIN,
+    github:   GITHUB,
   },
 
-  // ── Hero section ───────────────────────────────────────────────────────────
+  // ── Hero ───────────────────────────────────────────────────────────────────
   hero: {
-    headline:             'Iron Raptor Digital',
-    subheadline:          'A small team building web applications, Alexa skills, and digital solutions.',
-    ctaLabel:             'See Our Projects',
-    ctaFragment:          'services',
-    secondaryCtaLabel:    'About Us',
-    secondaryCtaFragment: 'about',
+    eyebrow:     'Software development · Western Pennsylvania',
+    headline:    'Custom software, built to last.',
+    subheadline: 'We turn ideas, inefficient processes, and technical challenges into web applications, APIs, and infrastructure that are easy to maintain and ready to grow with your business.',
+    primaryCta:   { label: 'Start a conversation', url: LINKEDIN },
+    secondaryCta: { label: 'See our work', path: '/projects' },
   },
 
-  // ── Projects section ───────────────────────────────────────────────────────
+  // ── Services ───────────────────────────────────────────────────────────────
   services: [
     {
-      icon:        '🗣️',
-      title:       'Alexa Skills',
-      description: 'Published skills on Amazon Alexa including Adventure Craft, Craft Helper, Knowledge Quest, and Minecraft Server List.',
+      icon:        'browser',
+      title:       'Web Applications',
+      description: 'Responsive, installable web apps built with Angular and TypeScript, from customer-facing tools to internal dashboards.',
     },
     {
-      icon:        '🌐',
-      title:       'Web Development',
-      description: 'From customer data portals (PGT Customer Portal) to server management tools (Raptor Panel) — we build apps that work.',
+      icon:        'server',
+      title:       'APIs & Backend',
+      description: 'C# and .NET services, REST APIs, and integrations with the platforms you already rely on, like Google Workspace.',
     },
     {
-      icon:        '🖥️',
-      title:       'Systems & Networks',
-      description: 'Building, upgrading, and maintaining computer systems and networks for home and small business environments.',
+      icon:        'cloud',
+      title:       'Infrastructure & Deployment',
+      description: 'Serverless hosting on AWS (Lambda, API Gateway, S3, DynamoDB), CI/CD with GitHub Actions, and the on-site networks and servers that keep everything running.',
+    },
+    {
+      icon:        'compass',
+      title:       'Technical Consulting',
+      description: 'A second set of eyes on architecture, tooling, and build-vs-buy decisions before you commit time and money.',
     },
   ],
 
-  // ── About section ──────────────────────────────────────────────────────────
+  // ── Approach ───────────────────────────────────────────────────────────────
+  approach: [
+    {
+      title:       'Understand the problem',
+      description: 'We start with how your work actually gets done, and find where time, money, or data is being lost.',
+    },
+    {
+      title:       'Build the right solution',
+      description: 'Focused software that solves that problem, shipped in small steps so you see progress early and often.',
+    },
+    {
+      title:       'Built to grow',
+      description: 'Clean, tested, documented code on proven technology, so it stays maintainable as your business changes.',
+    },
+  ],
+
+  stack: ['C#', '.NET Core', 'TypeScript', 'Angular', 'Tailwind CSS', 'AWS Lambda', 'API Gateway', 'S3', 'DynamoDB', 'CloudWatch', 'REST APIs', 'Google Sheets API', 'GitHub Actions', 'xUnit', 'Jasmine & Karma', 'Proxmox', 'UniFi'],
+
+  // ── About ──────────────────────────────────────────────────────────────────
   about: {
-    heading: 'About Iron Raptor Digital',
+    heading: 'Small by design.',
     paragraphs: [
-      'Iron Raptor Digital is a small team of developers that work with the latest web technologies. We also work with building, upgrading, and maintaining computer systems and networks.',
-      'Got an idea? Let\'s build it. We\'ve shipped Alexa skills, web applications, and tools used by real people.',
+      'Iron Raptor Digital has been building software since 2013, starting as an independent practice in New Castle, Pennsylvania and now operating as Iron Raptor Digital, LLC.',
+      'You work directly with the engineer writing your code. There are no hand-offs or account managers, which keeps communication simple, decisions fast, and the result focused on what actually matters to your business.',
     ],
     highlights: [
-      { value: '4+', label: 'Alexa Skills'  },
-      { value: '2+', label: 'Web Projects'  },
-      { value: '∞',  label: 'Lines of Code' },
+      { value: '2013',        label: 'Building software since' },
+      { value: 'Open source', label: 'Libraries on GitHub & NuGet' },
+      { value: 'End to end',  label: 'From the UI to the server rack' },
     ],
-    imagePath: null,
   },
 
-  // ── Testimonials — empty array hides the section ───────────────────────────
-  testimonials: {
-    heading:          'What People Say',
-    googleReviewsUrl: null,
-    items:            [],
+  // ── Closing call to action ─────────────────────────────────────────────────
+  cta: {
+    heading: 'Have a project in mind?',
+    body:    'Tell us what you are trying to solve. We will give you an honest take on the best way to get there.',
+    action:  { label: 'Message us on LinkedIn', url: LINKEDIN },
   },
 
-  // Rich projects metadata (used on /projects list and detail pages)
+  // ── Projects ───────────────────────────────────────────────────────────────
   projects: [
     {
-      slug: 'raptor-panel',
-      title: 'Raptor Panel',
-      description: 'Server management and control panel used for our game servers.',
-      longDescription: [
-        'Raptor Panel is an internal tool used to manage server instances, perform backups, and view uptime metrics.',
-        'It includes user roles, scheduled tasks, and integrations for remote console access.',
+      slug:     'raptor-gig',
+      name:     'Raptor Gig',
+      kind:     'Web application',
+      icon:     'phone',
+      featured: true,
+      summary:  'A mobile-first app that helps gig workers log trips, shifts, and earnings, synced to their own Google Sheet.',
+      description: [
+        'Raptor Gig gives rideshare and delivery drivers a fast way to track their work from the road. It runs offline first, so nothing is lost on a bad connection, and syncs everything to a Google Sheet the driver owns.',
+        'The Angular front end is an installable PWA backed by AWS Amplify and C# Lambda functions built on our RaptorSheets library.',
       ],
+      features: [
+        'Trip and shift logging with earnings, tips, and bonuses',
+        'Daily, weekly, and monthly reports',
+        'Offline-first storage with background sync',
+        'Data stays in the user\'s own Google Sheet',
+      ],
+      tags:  ['Angular', 'PWA', 'AWS Amplify', 'C# Lambda', 'Google Sheets API'],
       links: [
-        { label: 'Repo / Docs', url: '#' }
+        { label: 'Open the app', url: 'https://gig.raptorsheets.com' },
+        { label: 'Source',       url: `${GITHUB}/gig-logger` },
       ],
     },
     {
-      slug: 'pgt-customer-portal',
-      title: 'PGT Customer Portal',
-      description: 'A customer portal for PGT that exposes account data and reports.',
-      longDescription: [
-        'PGT Customer Portal is a web application that provides account management, reporting dashboards, and file uploads for customers.',
+      slug:     'raptorsheets',
+      name:     'RaptorSheets',
+      kind:     'Open-source .NET library',
+      icon:     'table',
+      featured: true,
+      summary:  'A .NET library that takes the pain out of the Google Sheets API, published on NuGet.',
+      description: [
+        'RaptorSheets makes Google Sheets a practical data store for .NET applications. Typed models map straight to sheet columns, and the library handles headers, formatting, validation, and batch operations.',
+        'It ships as RaptorSheets.Core for custom integrations and RaptorSheets.Gig, a ready-made schema that powers Raptor Gig.',
       ],
+      features: [
+        'Strongly typed entities mapped to sheet columns',
+        'Header management, formatting, drop-downs, and cell protection',
+        'Batch operations for large datasets',
+        'Tested in CI with coverage and quality gates',
+      ],
+      tags:  ['C#', '.NET 8', 'NuGet', 'Google Sheets API'],
+      links: [
+        { label: 'Website', url: 'https://www.raptorsheets.com' },
+        { label: 'NuGet',   url: 'https://www.nuget.org/packages/RaptorSheets.Core' },
+        { label: 'Source',  url: `${GITHUB}/RaptorSheets` },
+      ],
+    },
+    {
+      slug:    'pgt-customer-portal',
+      name:    'PGT Trucking Customer Portal',
+      kind:    'Client project · Modernization',
+      icon:    'refresh',
+      summary: 'Rebuilt a trucking company\'s customer portal from VB.NET Web Forms on a modern C# MVC stack.',
+      description: [
+        'PGT Trucking needed its customer portal brought forward from VB.NET ASP.NET 2.0 Web Forms. We converted it to C# on ASP.NET MVC, keeping the data and workflows customers relied on while making the codebase far easier to maintain.',
+        'Along the way the portal gained inline editing, self-service user management, and a new location details section.',
+      ],
+      features: [
+        'Stored procedures replaced with Entity Framework and a data access layer',
+        'Web Forms grid views rebuilt as MVC web grids with inline edit and delete',
+        'New ASP.NET Identity login, user creation, and password resets',
+        'Forms for managing properties and location details',
+      ],
+      tags:  ['C#', 'ASP.NET MVC', 'Entity Framework', 'ASP.NET Identity'],
+      links: [],
+    },
+    {
+      slug:    'alexa-skills',
+      name:    'Alexa Skills',
+      kind:    'Voice applications',
+      icon:    'mic',
+      summary: 'Voice experiences for Amazon Alexa, backed by a serverless data pipeline.',
+      description: [
+        'We built and published several skills for Amazon Alexa, including Adventure Craft, Craft Helper, Knowledge Quest, and Minecraft Server List.',
+        'A shared AWS Lambda pipeline converts source files and Google Sheets into the data each skill serves, so content can be updated without redeploying.',
+      ],
+      tags:  ['Alexa Skills Kit', 'AWS Lambda', 'TypeScript'],
       links: [],
     },
   ],
-
-  // ── Contact section ────────────────────────────────────────────────────────
-  contact: {
-    heading:    'Get in Touch',
-    subheading: 'Interested in working together or have a project in mind? Connect with us on LinkedIn.',
-    formspreeId: null,
-  },
 };

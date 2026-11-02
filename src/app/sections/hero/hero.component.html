@@ -1,39 +1,70 @@
-<section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+<section id="hero" class="relative overflow-hidden border-b border-line pt-32 pb-20 md:pt-40 md:pb-28">
 
-  <!-- Retro grid background -->
-  <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
-       style="background-image: linear-gradient(rgba(0,217,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,217,255,1) 1px, transparent 1px); background-size: 60px 60px;">
-  </div>
+  <!-- Faint engineering grid, faded toward the edges -->
+  <div class="hero-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
-  <!-- Radial glow -->
-  <div class="absolute inset-0 pointer-events-none"
-       style="background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,217,255,0.06) 0%, transparent 70%);">
-  </div>
+  <div class="container-custom relative grid items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
 
-  <div class="container-custom text-center relative z-10 py-20">
+    <div class="animate-fade-up">
+      <p class="eyebrow">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+        {{ config.hero.eyebrow }}
+      </p>
 
-    <!-- Terminal-style label -->
-    <p class="font-mono text-accent/70 text-sm tracking-widest uppercase mb-6 animate-fade-in">
-      <span class="text-accent/40">~/</span> welcome
-    </p>
+      <h1 class="mt-6 text-display-md md:text-display-lg">
+        {{ config.hero.headline }}
+      </h1>
 
-    <h1 class="gradient-text mb-6 animate-slide-up">
-      {{ config.hero.headline }}
-    </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+        {{ config.hero.subheadline }}
+      </p>
 
-    <p class="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-slide-up">
-      {{ config.hero.subheadline }}
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-      <a href="#{{ config.hero.ctaFragment }}" class="btn btn-primary text-base">
-        {{ config.hero.ctaLabel }}
-      </a>
-      @if (config.hero.secondaryCtaLabel) {
-        <a href="#{{ config.hero.secondaryCtaFragment }}" class="btn btn-secondary text-base">
-          {{ config.hero.secondaryCtaLabel }}
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <a [href]="config.hero.primaryCta.url" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          {{ config.hero.primaryCta.label }}
+          <app-icon name="arrow" class="h-4 w-4" />
         </a>
-      }
+        <a [routerLink]="config.hero.secondaryCta.path" class="btn-secondary">
+          {{ config.hero.secondaryCta.label }}
+        </a>
+      </div>
+
+      <dl class="mt-12 flex flex-wrap gap-x-10 gap-y-4 text-sm">
+        <div>
+          <dt class="text-ink-muted">Founded</dt>
+          <dd class="mt-1 font-semibold">{{ config.business.founded }}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-muted">Based in</dt>
+          <dd class="mt-1 font-semibold">{{ config.business.location }}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-muted">Focus</dt>
+          <dd class="mt-1 font-semibold">.NET · Angular · AWS</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Code window: a real RaptorSheets example -->
+    <div class="animate-fade-up [animation-delay:150ms] hidden md:block">
+      <div class="overflow-hidden rounded-xl border border-line bg-surface shadow-lift">
+        <div class="flex items-center gap-2 border-b border-line bg-surface-2 px-4 py-3">
+          <span class="h-2.5 w-2.5 rounded-full bg-ink-muted/30"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-ink-muted/30"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-ink-muted/30"></span>
+          <span class="ml-3 font-mono text-xs text-ink-muted">TripReport.cs</span>
+        </div>
+        <pre class="overflow-x-auto p-5 font-mono text-[13px] leading-6 text-ink-soft"><code><span class="code-k">using</span> RaptorSheets.Core.Services;
+
+<span class="code-c">// Google Sheets as a typed data store</span>
+<span class="code-k">var</span> sheets = <span class="code-k">new</span> <span class="code-t">GoogleSheetService</span>(credentials, sheetId);
+<span class="code-k">var</span> data   = <span class="code-k">await</span> sheets.<span class="code-f">GetSheetData</span>(<span class="code-s">"Trips"</span>);
+
+<span class="code-k">var</span> weekly = data.Values
+    .<span class="code-f">Select</span>(<span class="code-t">Trip</span>.<span class="code-f">FromRow</span>)
+    .<span class="code-f">GroupBy</span>(t =&gt; t.Week)
+    .<span class="code-f">Select</span>(g =&gt; <span class="code-k">new</span> {{ '{' }} g.Key, Total = g.<span class="code-f">Sum</span>(t =&gt; t.Pay) {{ '}' }});</code></pre>
+      </div>
     </div>
 
   </div>
