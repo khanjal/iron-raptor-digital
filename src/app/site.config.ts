@@ -242,9 +242,10 @@ export const SITE_CONFIG: SiteConfig = {
       name:    'PGT Trucking Customer Portal',
       kind:    'Client project · Modernization',
       icon:    'refresh',
-      summary: 'Rebuilt a trucking company\'s customer portal from VB.NET Web Forms on a modern C# MVC stack.',
+      summary: 'A portal where PGT Trucking\'s customers looked up their orders, rebuilt from VB.NET Web Forms on C# MVC.',
       description: [
-        'PGT Trucking needed its customer portal brought forward from VB.NET ASP.NET 2.0 Web Forms. We converted it to C# on ASP.NET MVC, keeping the data and workflows customers relied on while making the codebase far easier to maintain.',
+        'The PGT Customer Portal gave PGT Trucking\'s customers a web view of their orders, backed by data from the company\'s AS/400 system.',
+        'We brought the portal forward from VB.NET ASP.NET 2.0 Web Forms to C# on ASP.NET MVC, keeping the data and workflows customers relied on while making the codebase far easier to maintain.',
         'Along the way the portal gained inline editing, self-service user management, and a new location details section.',
       ],
       features: [
@@ -253,7 +254,7 @@ export const SITE_CONFIG: SiteConfig = {
         'New ASP.NET Identity login, user creation, and password resets',
         'Forms for managing properties and location details',
       ],
-      tags:  ['C#', 'ASP.NET MVC', 'Entity Framework', 'ASP.NET Identity'],
+      tags:  ['C#', 'ASP.NET MVC', 'Entity Framework', 'ASP.NET Identity', 'IBM AS/400'],
       links: [],
     },
     {
