@@ -15,9 +15,14 @@
 
         <div>
           <div class="flex items-center gap-4">
-            <div class="icon-tile">
-              <app-icon [name]="project.icon" class="h-6 w-6" />
-            </div>
+            @if (project.image) {
+              <img [src]="project.image" [alt]="project.name + ' icon'" width="44" height="44"
+                   class="h-11 w-11 rounded-lg border border-line bg-white object-cover" />
+            } @else {
+              <div class="icon-tile">
+                <app-icon [name]="project.icon" class="h-6 w-6" />
+              </div>
+            }
             <div>
               <h2 class="text-2xl">{{ project.name }}</h2>
               <p class="font-mono text-xs text-ink-muted">{{ project.kind }}</p>

@@ -37,6 +37,7 @@ export interface Project {
   name: string;
   kind: string;          // Short label, e.g. 'Web application'
   icon: IconName;
+  image?: string;        // Path inside public/; shown instead of the icon
   summary: string;       // One line, used on the home page
   description: string[]; // Paragraphs, used on /projects
   features?: string[];
@@ -256,17 +257,20 @@ export const SITE_CONFIG: SiteConfig = {
       links: [],
     },
     {
-      slug:    'alexa-skills',
-      name:    'Alexa Skills',
-      kind:    'Voice applications',
+      slug:    'craft-helper',
+      name:    'Craft Helper',
+      kind:    'Alexa skill',
       icon:    'mic',
-      summary: 'Voice experiences for Amazon Alexa, backed by a serverless data pipeline.',
+      image:   'images/craft-helper.jpg',
+      summary: 'An unofficial Minecraft assistant for Amazon Alexa that answers crafting questions by voice.',
       description: [
-        'We built and published several skills for Amazon Alexa, including Adventure Craft, Craft Helper, Knowledge Quest, and Minecraft Server List.',
-        'A shared AWS Lambda pipeline converts source files and Google Sheets into the data each skill serves, so content can be updated without redeploying.',
+        'Craft Helper lets Minecraft players ask Alexa how to make items, hands-free, without leaving the game to look up a recipe.',
+        'Its content comes from an AWS Lambda pipeline that converts source files and Google Sheets into the data the skill serves, so it can be updated without redeploying.',
       ],
       tags:  ['Alexa Skills Kit', 'AWS Lambda', 'TypeScript'],
-      links: [],
+      links: [
+        { label: 'Get it on Amazon', url: 'https://www.amazon.com/Craft-Helper-Unofficial-Minecraft-Assistant/dp/B073GHV3FP/' },
+      ],
     },
   ],
 };
