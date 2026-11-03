@@ -20,7 +20,7 @@
       <p class="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">Technologies we work with</p>
       <ul class="mt-5 flex flex-wrap gap-2">
         @for (tech of config.stack; track tech) {
-          <li class="rounded-md border border-line bg-surface-2 px-3 py-1.5 text-sm font-medium text-ink-soft">{{ tech }}</li>
+          <li><app-tech-tag [name]="tech" class="rounded-md border border-line bg-surface-2 px-3 py-1.5 text-sm font-medium text-ink-soft" /></li>
         }
       </ul>
     </div>

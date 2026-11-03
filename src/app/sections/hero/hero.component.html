@@ -3,7 +3,7 @@
   <!-- Faint engineering grid, faded toward the edges -->
   <div class="hero-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
-  <div class="container-custom relative grid items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
+  <div class="container-custom relative grid items-center gap-14 lg:grid-cols-[1fr_1.1fr] xl:grid-cols-[1.1fr_1fr]">
 
     <div class="animate-fade-up">
       <p class="eyebrow">
@@ -45,25 +45,16 @@
       </dl>
     </div>
 
-    <!-- Code window: a real RaptorSheets example -->
-    <div class="animate-fade-up [animation-delay:150ms] hidden md:block">
+    <!-- Code window: a real excerpt from our projects, picked per page load -->
+    <div class="animate-fade-up [animation-delay:150ms] hidden min-w-0 md:block">
       <div class="overflow-hidden rounded-xl border border-line bg-surface shadow-lift">
         <div class="flex items-center gap-2 border-b border-line bg-surface-2 px-4 py-3">
-          <span class="h-2.5 w-2.5 rounded-full bg-ink-muted/30"></span>
-          <span class="h-2.5 w-2.5 rounded-full bg-ink-muted/30"></span>
-          <span class="h-2.5 w-2.5 rounded-full bg-ink-muted/30"></span>
-          <span class="ml-3 font-mono text-xs text-ink-muted">TripReport.cs</span>
+          <span class="dot-close h-3 w-3 rounded-full"></span>
+          <span class="dot-min h-3 w-3 rounded-full"></span>
+          <span class="dot-max h-3 w-3 rounded-full"></span>
+          <span class="ml-3 font-mono text-xs text-ink-muted">{{ snippet.file }}</span>
         </div>
-        <pre class="overflow-x-auto p-5 font-mono text-[13px] leading-6 text-ink-soft"><code><span class="code-k">using</span> RaptorSheets.Core.Services;
-
-<span class="code-c">// Google Sheets as a typed data store</span>
-<span class="code-k">var</span> sheets = <span class="code-k">new</span> <span class="code-t">GoogleSheetService</span>(credentials, sheetId);
-<span class="code-k">var</span> data   = <span class="code-k">await</span> sheets.<span class="code-f">GetSheetData</span>(<span class="code-s">"Trips"</span>);
-
-<span class="code-k">var</span> weekly = data.Values
-    .<span class="code-f">Select</span>(<span class="code-t">Trip</span>.<span class="code-f">FromRow</span>)
-    .<span class="code-f">GroupBy</span>(t =&gt; t.Week)
-    .<span class="code-f">Select</span>(g =&gt; <span class="code-k">new</span> {{ '{' }} g.Key, Total = g.<span class="code-f">Sum</span>(t =&gt; t.Pay) {{ '}' }});</code></pre>
+        <pre class="min-h-[28rem] overflow-x-auto p-5 font-mono text-[12px] leading-6 xl:text-[12.5px] text-ink-soft"><code [innerHTML]="code"></code></pre>
       </div>
     </div>
 

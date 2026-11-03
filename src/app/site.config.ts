@@ -165,7 +165,7 @@ export const SITE_CONFIG: SiteConfig = {
     },
   ],
 
-  stack: ['C#', '.NET Core', 'TypeScript', 'Angular', 'Tailwind CSS', 'AWS Lambda', 'API Gateway', 'S3', 'DynamoDB', 'CloudWatch', 'REST APIs', 'Google Sheets API', 'GitHub Actions', 'xUnit', 'Jasmine & Karma', 'Proxmox', 'UniFi'],
+  stack: ['C#', '.NET Core', 'TypeScript', 'Java', 'Angular', 'Tailwind CSS', 'AWS Lambda', 'API Gateway', 'S3', 'DynamoDB', 'CloudWatch', 'REST APIs', 'Google Sheets API', 'GitHub Actions', 'xUnit', 'Jasmine & Karma', 'Proxmox', 'UniFi'],
 
   // ── About ──────────────────────────────────────────────────────────────────
   about: {
@@ -237,6 +237,30 @@ export const SITE_CONFIG: SiteConfig = {
         { label: 'Website', url: 'https://www.raptorsheets.com' },
         { label: 'NuGet',   url: 'https://www.nuget.org/packages/RaptorSheets.Core' },
         { label: 'Source',  url: `${GITHUB}/RaptorSheets` },
+      ],
+    },
+    {
+      slug:    'wormhole-x-treme',
+      name:    'Wormhole X-Treme',
+      kind:    'Open-source Minecraft plugin',
+      icon:    'refresh',
+      image:   'images/wormhole-x-treme.svg',
+      summary: 'A modern revival of a classic Stargate-style travel plugin for Minecraft servers.',
+      description: [
+        'Wormhole X-Treme was a popular Bukkit plugin that went quiet years ago. Our fork brings it to modern servers, supporting Bukkit, Spigot, and Paper on Minecraft 1.20 through 26.3.',
+        'Beyond the original Stargates, it adds transport rings, beaming, and quantum mirrors, and it moves minecarts, boats, mounts, projectiles, and mobs through gates along with players.',
+      ],
+      features: [
+        'Four travel systems: Stargates, transport rings, beaming, and quantum mirrors',
+        'Plain YAML storage, with import from the SQLite databases of older forks',
+        'Tested in CI with SonarCloud coverage and quality gates',
+        'Published on GitHub, SpigotMC, Modrinth, Hangar, and CurseForge',
+      ],
+      tags:  ['Java', 'Bukkit / Spigot / Paper', 'JUnit', 'GitHub Actions'],
+      links: [
+        { label: 'Modrinth',  url: 'https://modrinth.com/plugin/wormhole-x-treme' },
+        { label: 'SpigotMC',  url: 'https://www.spigotmc.org/resources/wormhole-x-treme.138936/' },
+        { label: 'Source',    url: `${GITHUB}/Wormhole-X-Treme` },
       ],
     },
     {

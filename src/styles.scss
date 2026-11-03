@@ -98,3 +98,23 @@ html.theme-dark {
     @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong;
   }
 }
+
+// Syntax colors for the hero code window (VS Code Light+ / Dark+).
+// Global because the highlighted spans are inserted with innerHTML.
+.code-k { color: #0000ff; }
+.code-t { color: #267f99; }
+.code-f { color: #795e26; }
+.code-v { color: #001080; }
+.code-s { color: #a31515; }
+.code-n { color: #098658; }
+.code-c { color: #008000; font-style: italic; }
+
+html.theme-dark {
+  .code-k { color: #569cd6; }
+  .code-t { color: #4ec9b0; }
+  .code-f { color: #dcdcaa; }
+  .code-v { color: #9cdcfe; }
+  .code-s { color: #ce9178; }
+  .code-n { color: #b5cea8; }
+  .code-c { color: #6a9955; }
+}

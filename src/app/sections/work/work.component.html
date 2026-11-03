@@ -31,7 +31,7 @@
             <p class="mt-2 leading-relaxed text-ink-soft">{{ project.summary }}</p>
             <div class="mb-6 mt-5 flex flex-1 flex-wrap content-start gap-2">
               @for (tag of project.tags; track tag) {
-                <span class="tag">{{ tag }}</span>
+                <app-tech-tag [name]="tag" class="tag" />
               }
             </div>
             @if (project.links.length) {

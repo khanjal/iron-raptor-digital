@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITE_CONFIG } from '../../site.config';
 import { IconComponent } from '../../shared/icon/icon.component';
+import { SNIPPETS, highlight } from './snippets';
 
 @Component({
   selector: 'app-hero',
@@ -12,4 +13,6 @@ import { IconComponent } from '../../shared/icon/icon.component';
 })
 export class HeroComponent {
   config = SITE_CONFIG;
+  snippet = SNIPPETS[Math.floor(Math.random() * SNIPPETS.length)];
+  code = highlight(this.snippet);
 }
