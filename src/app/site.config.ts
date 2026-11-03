@@ -27,6 +27,19 @@ export interface Step {
   description: string;
 }
 
+export interface Practice {
+  icon: IconName;
+  title: string;
+  body: string;
+  points: string[];
+}
+
+export interface TestLayer {
+  name: string;
+  detail: string;
+  where: string;
+}
+
 export interface Highlight {
   value: string;
   label: string;
@@ -73,6 +86,15 @@ export interface SiteConfig {
   services: Service[];
   approach: Step[];
   stack: string[];
+  engineering: {
+    heading: string;
+    lead: string;
+    stats: Highlight[];
+    statsNote: string;
+    practices: Practice[];
+    testLayers: TestLayer[];
+    skills: { name: string; purpose: string }[];
+  };
   about: {
     heading: string;
     paragraphs: string[];
@@ -106,6 +128,7 @@ export const SITE_CONFIG: SiteConfig = {
     { label: 'Services', path: '/', fragment: 'services' },
     { label: 'Work',     path: '/projects' },
     { label: 'Approach', path: '/', fragment: 'approach' },
+    { label: 'Engineering', path: '/', fragment: 'engineering' },
     { label: 'About',    path: '/', fragment: 'about' },
   ],
 
@@ -166,6 +189,81 @@ export const SITE_CONFIG: SiteConfig = {
   ],
 
   stack: ['C#', '.NET Core', 'TypeScript', 'Java', 'Angular', 'Tailwind CSS', 'AWS Lambda', 'API Gateway', 'S3', 'DynamoDB', 'CloudWatch', 'REST APIs', 'Google Sheets API', 'GitHub Actions', 'xUnit', 'Jasmine & Karma', 'Proxmox', 'UniFi'],
+
+  // ── Engineering practices ──────────────────────────────────────────────────
+  // Numbers are from GitHub and SonarCloud for Wormhole X-Treme, RaptorSheets,
+  // and Raptor Gig as of November 2026. Update them now and then.
+  engineering: {
+    heading: 'How we build',
+    lead: 'The same process runs on every project, ours or yours: plan in issues, land every change through a reviewed pull request, test in layers, and use AI where it makes the work better, with a person accountable for every merge.',
+    stats: [
+      { value: '1,050+', label: 'Pull requests merged' },
+      { value: '6,800+', label: 'Automated tests' },
+      { value: '~90%',   label: 'Test coverage' },
+      { value: '70+',    label: 'Releases shipped' },
+    ],
+    statsNote: 'Across Wormhole X-Treme, RaptorSheets, and Raptor Gig. Coverage measured by SonarCloud.',
+    practices: [
+      {
+        icon:  'clipboard',
+        title: 'Planned in issues',
+        body:  'Work starts as a GitHub issue, not a hallway conversation, so every change has a reason you can find later.',
+        points: [
+          'Bug and feature templates capture what is needed up front',
+          'Labels, milestones per release, and project boards',
+          'New reports get an AI triage pass that finds the likely code and the open questions',
+        ],
+      },
+      {
+        icon:  'pull',
+        title: 'Shipped through pull requests',
+        body:  'Nothing goes straight to main. Each change is a pull request with a checklist that must be complete before it merges.',
+        points: [
+          'Two reviews: one before the PR opens, one of the finished PR',
+          'Zero new SonarCloud issues and no new compiler warnings',
+          'Tied to the milestone and release notes it ships in',
+        ],
+      },
+      {
+        icon:  'layers',
+        title: 'Tested in layers',
+        body:  'Fast unit tests catch most problems. Slower layers catch what unit tests cannot see.',
+        points: [
+          'CI runs on every push and pull request',
+          'Coverage and quality gates on SonarCloud and Codecov',
+          'Mutation checks prove a test fails when the code it guards breaks',
+        ],
+      },
+      {
+        icon:  'sparkles',
+        title: 'AI-assisted, human-owned',
+        body:  'We use Claude Code and GitHub Copilot, guided by project skills that write down how each codebase works.',
+        points: [
+          'Routine changes go to a faster model, judgment calls to a stronger one',
+          'Code is never reviewed by the model that wrote it',
+          'APIs are checked against real libraries, not answered from memory',
+        ],
+      },
+    ],
+    testLayers: [
+      { name: 'Unit',            detail: 'xUnit, JUnit with Mockito, and Jasmine/Karma for the Angular app', where: 'Every project' },
+      { name: 'Integration',     detail: 'Reads and writes against live Google Sheets',                        where: 'RaptorSheets' },
+      { name: 'Load',            detail: 'Scheduled bulk-write runs to catch rate limits and slowdowns',       where: 'RaptorSheets' },
+      { name: 'Compatibility',   detail: 'One build tested across Spigot, Paper, and Purpur versions',         where: 'Wormhole X-Treme' },
+      { name: 'Boot',            detail: 'Real servers start with the plugin and its integrations loaded',    where: 'Wormhole X-Treme' },
+      { name: 'Player journeys', detail: 'A scripted player travels through gates on a live server',          where: 'Wormhole X-Treme' },
+    ],
+    skills: [
+      { name: 'pr-review',            purpose: 'Two independent model reviews before merge' },
+      { name: 'ship-it',              purpose: 'Full test run, changelog, and release steps' },
+      { name: 'route-implementation', purpose: 'Matches each change to the right model' },
+      { name: 'mutation-check',       purpose: 'Breaks code on purpose to prove tests catch it' },
+      { name: 'sonar-check',          purpose: 'Runs quality rules locally before pushing' },
+      { name: 'verify-bukkit-api',    purpose: 'Confirms APIs against the actual library jars' },
+      { name: 'cross-version-compat', purpose: 'Reviews changes for version-specific breakage' },
+      { name: 'triage-sweep',         purpose: 'First-pass investigation of new issues' },
+    ],
+  },
 
   // ── About ──────────────────────────────────────────────────────────────────
   about: {
