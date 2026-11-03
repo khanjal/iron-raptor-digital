@@ -92,6 +92,11 @@ export interface SiteConfig {
     stats: Highlight[];
     statsNote: string;
     practices: Practice[];
+    visibility: {
+      heading: string;
+      body: string;
+      options: { title: string; points: string[] }[];
+    };
     testLayers: TestLayer[];
     skills: { name: string; purpose: string }[];
   };
@@ -195,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
   // and Raptor Gig as of November 2026. Update them now and then.
   engineering: {
     heading: 'How we build',
-    lead: 'Our open-source projects show the process in public: plan in issues, land every change through a reviewed pull request, test in layers, and use AI where it makes the work better, with a person accountable for every merge. Private work keeps the same habits, with the checks run on our own machines instead of public CI.',
+    lead: 'Plan in issues, land every change through a reviewed pull request, test in layers, and use AI where it makes the work better, with a person accountable for every merge.',
     stats: [
       { value: '1,050+', label: 'Pull requests merged' },
       { value: '6,800+', label: 'Automated tests' },
@@ -229,8 +234,8 @@ export const SITE_CONFIG: SiteConfig = {
         title: 'Tested in layers',
         body:  'Fast unit tests catch most problems. Slower layers catch what unit tests cannot see.',
         points: [
-          'Checks run on every change: GitHub Actions for open source, locally for private work',
-          'Coverage tracked with SonarCloud and Codecov on open-source projects',
+          'Checks run on every change, before anything merges',
+          'Coverage and code-quality tracking alongside the tests',
           'Mutation checks prove a test fails when the code it guards breaks',
         ],
       },
@@ -245,6 +250,28 @@ export const SITE_CONFIG: SiteConfig = {
         ],
       },
     ],
+    visibility: {
+      heading: 'Open source or private, your call',
+      body: 'Client projects are private unless you choose otherwise. The process is the same either way; only where it runs changes.',
+      options: [
+        {
+          title: 'Private',
+          points: [
+            'Code, issues, and pull requests visible only to your team',
+            'Tests and quality checks run on our own machines',
+            'The default for client work',
+          ],
+        },
+        {
+          title: 'Open source',
+          points: [
+            'Public repository, issues, and release notes',
+            'Checks run in public CI with SonarCloud and Codecov',
+            'How we run our own libraries and plugins',
+          ],
+        },
+      ],
+    },
     testLayers: [
       { name: 'Unit',            detail: 'xUnit, JUnit with Mockito, and Jasmine/Karma for the Angular app', where: 'Every project' },
       { name: 'Integration',     detail: 'Reads and writes against live Google Sheets',                        where: 'RaptorSheets' },
