@@ -39,11 +39,6 @@ export interface TestLayer {
   detail: string;
 }
 
-export interface ProjectTesting {
-  project: string;
-  layers: TestLayer[];
-}
-
 export interface Highlight {
   value: string;
   label: string;
@@ -101,7 +96,7 @@ export interface SiteConfig {
       body: string;
       options: { title: string; points: string[] }[];
     };
-    testing: ProjectTesting[];
+    testing: TestLayer[];
     skills: { name: string; purpose: string }[];
   };
   about: {
@@ -276,33 +271,17 @@ export const SITE_CONFIG: SiteConfig = {
         },
       ],
     },
-    // Each project gets the test layers that fit what it is; not every project has all of them.
+    // Kinds of tests we use; each project gets the ones that fit it, not all of them.
     testing: [
-      {
-        project: 'Raptor Gig',
-        layers: [
-          { name: 'App unit tests', detail: 'Jasmine and Karma for the Angular front end' },
-          { name: 'API tests',      detail: 'xUnit and Moq for the .NET Lambda backend' },
-          { name: 'Lint',           detail: 'Front end and backend, on every change' },
-        ],
-      },
-      {
-        project: 'RaptorSheets',
-        layers: [
-          { name: 'Unit tests',  detail: 'xUnit across the library and its packages' },
-          { name: 'Integration', detail: 'Reads and writes against live Google Sheets' },
-          { name: 'Load',        detail: 'Scheduled bulk-write runs to catch rate limits and slowdowns' },
-        ],
-      },
-      {
-        project: 'Wormhole X-Treme',
-        layers: [
-          { name: 'Unit tests',      detail: 'JUnit 5 and Mockito' },
-          { name: 'Compatibility',   detail: 'One build tested across Spigot, Paper, and Purpur versions' },
-          { name: 'Boot',            detail: 'Real servers start with the plugin and its integrations loaded' },
-          { name: 'Player journeys', detail: 'A scripted player travels through gates on a live server' },
-        ],
-      },
+      { name: 'Unit',           detail: 'xUnit, JUnit with Mockito, and Jasmine/Karma' },
+      { name: 'API',            detail: 'Backend endpoints with mocked dependencies' },
+      { name: 'Integration',    detail: 'Against live services like the Google Sheets API' },
+      { name: 'Load',           detail: 'Scheduled bulk runs to catch rate limits and slowdowns' },
+      { name: 'Compatibility',  detail: 'One build checked across many platform versions' },
+      { name: 'Boot',           detail: 'The software starts on real servers with its integrations' },
+      { name: 'End to end',     detail: 'Scripted users walk through real flows on a live system' },
+      { name: 'Mutation',       detail: 'Break the code on purpose to prove the tests catch it' },
+      { name: 'Static analysis', detail: 'Lint and code-quality rules on every change' },
     ],
     skills: [
       { name: 'pr-review',            purpose: 'Two independent model reviews before merge' },

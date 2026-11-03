@@ -68,26 +68,19 @@
 
       <!-- Test layers -->
       <div class="card md:p-8">
-        <h3 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">Testing by project</h3>
+        <h3 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">Kinds of tests we use</h3>
         <p class="mt-4 text-sm leading-relaxed text-ink-soft">
-          Each project gets the layers that fit what it is. A library needs live API tests;
+          Each project gets the kinds that fit it. A library needs live API tests;
           a server plugin needs real servers.
         </p>
-        <div class="mt-6 space-y-6">
-          @for (group of eng.testing; track group.project) {
-            <div>
-              <p class="font-semibold">{{ group.project }}</p>
-              <ul class="mt-2 divide-y divide-line border-l-2 border-accent/40 pl-4">
-                @for (layer of group.layers; track layer.name) {
-                  <li class="flex flex-col gap-0.5 py-2 sm:flex-row sm:items-baseline sm:gap-4">
-                    <span class="shrink-0 text-sm font-medium sm:w-32">{{ layer.name }}</span>
-                    <span class="text-sm leading-relaxed text-ink-soft">{{ layer.detail }}</span>
-                  </li>
-                }
-              </ul>
-            </div>
+        <ul class="mt-6 divide-y divide-line">
+          @for (kind of eng.testing; track kind.name) {
+            <li class="flex flex-col gap-0.5 py-3 sm:flex-row sm:items-baseline sm:gap-4">
+              <span class="shrink-0 font-medium sm:w-36">{{ kind.name }}</span>
+              <span class="text-sm leading-relaxed text-ink-soft">{{ kind.detail }}</span>
+            </li>
           }
-        </div>
+        </ul>
       </div>
 
       <!-- Skills -->
