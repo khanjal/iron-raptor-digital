@@ -13,11 +13,13 @@
     <div class="mt-14 grid gap-6 sm:grid-cols-2">
       @for (service of config.services; track service.title) {
         <div class="card card-hover">
-          <div class="icon-tile">
-            <app-icon [name]="service.icon" class="h-6 w-6" />
+          <div class="flex items-center gap-4">
+            <div class="icon-tile">
+              <app-icon [name]="service.icon" class="h-6 w-6" />
+            </div>
+            <h3 class="text-lg">{{ service.title }}</h3>
           </div>
-          <h3 class="mt-5 text-lg">{{ service.title }}</h3>
-          <p class="mt-2 leading-relaxed text-ink-soft">{{ service.description }}</p>
+          <p class="mt-4 leading-relaxed text-ink-soft">{{ service.description }}</p>
         </div>
       }
     </div>

@@ -16,19 +16,21 @@
       @for (project of config.projects; track project.slug) {
         @if (project.featured) {
           <article class="card card-hover flex flex-col">
-            <div class="flex items-start justify-between gap-4">
+            <div class="flex items-center gap-4">
               @if (project.image) {
                 <img [src]="project.image" [alt]="project.name + ' logo'" width="56" height="56"
-                     class="h-14 w-14 rounded-xl border border-line bg-white object-contain p-1" />
+                     class="h-14 w-14 shrink-0 rounded-xl border border-line bg-white object-contain p-1" />
               } @else {
                 <div class="icon-tile">
                   <app-icon [name]="project.icon" class="h-6 w-6" />
                 </div>
               }
-              <span class="font-mono text-xs text-ink-muted">{{ project.kind }}</span>
+              <div>
+                <h3 class="text-xl">{{ project.name }}</h3>
+                <p class="font-mono text-xs text-ink-muted">{{ project.kind }}</p>
+              </div>
             </div>
-            <h3 class="mt-5 text-xl">{{ project.name }}</h3>
-            <p class="mt-2 leading-relaxed text-ink-soft">{{ project.summary }}</p>
+            <p class="mt-4 leading-relaxed text-ink-soft">{{ project.summary }}</p>
             <div class="mb-6 mt-5 flex flex-1 flex-wrap content-start gap-2">
               @for (tag of project.tags; track tag) {
                 <app-tech-tag [name]="tag" class="tag" />
