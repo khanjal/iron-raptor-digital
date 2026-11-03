@@ -195,7 +195,7 @@ export const SITE_CONFIG: SiteConfig = {
   // and Raptor Gig as of November 2026. Update them now and then.
   engineering: {
     heading: 'How we build',
-    lead: 'The same process runs on every project, ours or yours: plan in issues, land every change through a reviewed pull request, test in layers, and use AI where it makes the work better, with a person accountable for every merge.',
+    lead: 'Our open-source projects show the process in public: plan in issues, land every change through a reviewed pull request, test in layers, and use AI where it makes the work better, with a person accountable for every merge. Private work keeps the same habits, with the checks run on our own machines instead of public CI.',
     stats: [
       { value: '1,050+', label: 'Pull requests merged' },
       { value: '6,800+', label: 'Automated tests' },
@@ -211,7 +211,7 @@ export const SITE_CONFIG: SiteConfig = {
         points: [
           'Bug and feature templates capture what is needed up front',
           'Labels, milestones per release, and project boards',
-          'New reports get an AI triage pass that finds the likely code and the open questions',
+          'On larger projects, new reports get an AI triage pass that finds the likely code and the open questions',
         ],
       },
       {
@@ -220,7 +220,7 @@ export const SITE_CONFIG: SiteConfig = {
         body:  'Nothing goes straight to main. Each change is a pull request with a checklist that must be complete before it merges.',
         points: [
           'Two reviews: one before the PR opens, one of the finished PR',
-          'Zero new SonarCloud issues and no new compiler warnings',
+          'No new code-quality issues or compiler warnings',
           'Tied to the milestone and release notes it ships in',
         ],
       },
@@ -229,8 +229,8 @@ export const SITE_CONFIG: SiteConfig = {
         title: 'Tested in layers',
         body:  'Fast unit tests catch most problems. Slower layers catch what unit tests cannot see.',
         points: [
-          'CI runs on every push and pull request',
-          'Coverage and quality gates on SonarCloud and Codecov',
+          'Checks run on every change: GitHub Actions for open source, locally for private work',
+          'Coverage tracked with SonarCloud and Codecov on open-source projects',
           'Mutation checks prove a test fails when the code it guards breaks',
         ],
       },
