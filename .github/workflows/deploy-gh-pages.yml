@@ -28,9 +28,9 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build for GitHub Pages
-        # Preview build for khanjal.github.io/iron-raptor-digital/ (no CNAME).
-        # Switch to `npm run build:gh-pages` when DNS moves to www.ironraptordigital.com.
-        run: npm run build:gh-pages:preview
+        # Serves www.ironraptordigital.com (includes CNAME). For a github.io preview
+        # without the custom domain, use `npm run build:gh-pages:preview` instead.
+        run: npm run build:gh-pages
 
       - name: Deploy to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4
