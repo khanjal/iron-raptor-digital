@@ -16,8 +16,8 @@
         <div>
           <div class="flex items-center gap-4">
             @if (project.image) {
-              <img [src]="project.image" [alt]="project.name + ' icon'" width="44" height="44"
-                   class="h-11 w-11 rounded-lg border border-line bg-white object-cover" />
+              <img [src]="project.image" [alt]="project.name + ' logo'" width="56" height="56"
+                   class="h-14 w-14 rounded-xl border border-line bg-white object-contain p-1" />
             } @else {
               <div class="icon-tile">
                 <app-icon [name]="project.icon" class="h-6 w-6" />

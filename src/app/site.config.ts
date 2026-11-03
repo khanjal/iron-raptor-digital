@@ -195,6 +195,7 @@ export const SITE_CONFIG: SiteConfig = {
       name:     'Raptor Gig',
       kind:     'Web application',
       icon:     'phone',
+      image:    'images/raptor-gig.png',
       featured: true,
       summary:  'A mobile-first app that helps gig workers log trips, shifts, and earnings, synced to their own Google Sheet.',
       description: [
@@ -218,6 +219,7 @@ export const SITE_CONFIG: SiteConfig = {
       name:     'RaptorSheets',
       kind:     'Open-source .NET library',
       icon:     'table',
+      image:    'images/raptorsheets.png',
       featured: true,
       summary:  'A .NET library that takes the pain out of the Google Sheets API, published on NuGet.',
       description: [
