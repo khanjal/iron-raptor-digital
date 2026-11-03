@@ -88,6 +88,12 @@ html.theme-dark {
     @apply flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent;
   }
 
+  // Raptor silhouette, tinted with the current text color
+  .logo-mark {
+    @apply inline-block shrink-0 bg-current;
+    mask: url('/logo-mark.png') center / contain no-repeat;
+  }
+
   .link-arrow {
     @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong;
   }
