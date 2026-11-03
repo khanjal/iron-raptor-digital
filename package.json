@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:gh-pages": "ng build --configuration production --base-href /",
+    "build:gh-pages": "ng build --configuration production --base-href / && node scripts/gh-pages-postbuild.mjs",
+    "build:gh-pages:preview": "ng build --configuration production --base-href /iron-raptor-digital/ && node scripts/gh-pages-postbuild.mjs --preview",
     "deploy": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/iron-raptor-digital/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
