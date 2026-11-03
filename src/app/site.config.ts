@@ -37,7 +37,11 @@ export interface Practice {
 export interface TestLayer {
   name: string;
   detail: string;
-  where: string;
+}
+
+export interface ProjectTesting {
+  project: string;
+  layers: TestLayer[];
 }
 
 export interface Highlight {
@@ -97,7 +101,7 @@ export interface SiteConfig {
       body: string;
       options: { title: string; points: string[] }[];
     };
-    testLayers: TestLayer[];
+    testing: ProjectTesting[];
     skills: { name: string; purpose: string }[];
   };
   about: {
@@ -272,13 +276,33 @@ export const SITE_CONFIG: SiteConfig = {
         },
       ],
     },
-    testLayers: [
-      { name: 'Unit',            detail: 'xUnit, JUnit with Mockito, and Jasmine/Karma for the Angular app', where: 'Every project' },
-      { name: 'Integration',     detail: 'Reads and writes against live Google Sheets',                        where: 'RaptorSheets' },
-      { name: 'Load',            detail: 'Scheduled bulk-write runs to catch rate limits and slowdowns',       where: 'RaptorSheets' },
-      { name: 'Compatibility',   detail: 'One build tested across Spigot, Paper, and Purpur versions',         where: 'Wormhole X-Treme' },
-      { name: 'Boot',            detail: 'Real servers start with the plugin and its integrations loaded',    where: 'Wormhole X-Treme' },
-      { name: 'Player journeys', detail: 'A scripted player travels through gates on a live server',          where: 'Wormhole X-Treme' },
+    // Each project gets the test layers that fit what it is; not every project has all of them.
+    testing: [
+      {
+        project: 'Raptor Gig',
+        layers: [
+          { name: 'App unit tests', detail: 'Jasmine and Karma for the Angular front end' },
+          { name: 'API tests',      detail: 'xUnit and Moq for the .NET Lambda backend' },
+          { name: 'Lint',           detail: 'Front end and backend, on every change' },
+        ],
+      },
+      {
+        project: 'RaptorSheets',
+        layers: [
+          { name: 'Unit tests',  detail: 'xUnit across the library and its packages' },
+          { name: 'Integration', detail: 'Reads and writes against live Google Sheets' },
+          { name: 'Load',        detail: 'Scheduled bulk-write runs to catch rate limits and slowdowns' },
+        ],
+      },
+      {
+        project: 'Wormhole X-Treme',
+        layers: [
+          { name: 'Unit tests',      detail: 'JUnit 5 and Mockito' },
+          { name: 'Compatibility',   detail: 'One build tested across Spigot, Paper, and Purpur versions' },
+          { name: 'Boot',            detail: 'Real servers start with the plugin and its integrations loaded' },
+          { name: 'Player journeys', detail: 'A scripted player travels through gates on a live server' },
+        ],
+      },
     ],
     skills: [
       { name: 'pr-review',            purpose: 'Two independent model reviews before merge' },

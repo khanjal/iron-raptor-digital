@@ -68,26 +68,26 @@
 
       <!-- Test layers -->
       <div class="card md:p-8">
-        <h3 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">Test layers</h3>
-        <ol class="mt-6 space-y-5">
-          @for (layer of eng.testLayers; track layer.name; let i = $index; let last = $last) {
-            <li class="relative flex gap-4">
-              @if (!last) {
-                <span class="absolute left-[13px] top-8 h-[calc(100%-0.75rem)] w-px bg-line" aria-hidden="true"></span>
-              }
-              <span class="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-accent/10 font-mono text-xs text-accent">
-                {{ i + 1 }}
-              </span>
-              <div>
-                <p class="font-semibold">
-                  {{ layer.name }}
-                  <span class="ml-2 font-mono text-[11px] font-normal text-ink-muted">{{ layer.where }}</span>
-                </p>
-                <p class="mt-1 text-sm leading-relaxed text-ink-soft">{{ layer.detail }}</p>
-              </div>
-            </li>
+        <h3 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-muted">Testing by project</h3>
+        <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+          Each project gets the layers that fit what it is. A library needs live API tests;
+          a server plugin needs real servers.
+        </p>
+        <div class="mt-6 space-y-6">
+          @for (group of eng.testing; track group.project) {
+            <div>
+              <p class="font-semibold">{{ group.project }}</p>
+              <ul class="mt-2 divide-y divide-line border-l-2 border-accent/40 pl-4">
+                @for (layer of group.layers; track layer.name) {
+                  <li class="flex flex-col gap-0.5 py-2 sm:flex-row sm:items-baseline sm:gap-4">
+                    <span class="shrink-0 text-sm font-medium sm:w-32">{{ layer.name }}</span>
+                    <span class="text-sm leading-relaxed text-ink-soft">{{ layer.detail }}</span>
+                  </li>
+                }
+              </ul>
+            </div>
           }
-        </ol>
+        </div>
       </div>
 
       <!-- Skills -->
