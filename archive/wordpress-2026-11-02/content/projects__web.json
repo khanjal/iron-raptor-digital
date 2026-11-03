@@ -1,0 +1,7 @@
+{
+  "title": "Web",
+  "link": "https://www.ironraptordigital.com/projects/web/",
+  "date": "2017-09-10T06:44:04",
+  "modified": "2017-09-10T06:44:04",
+  "content_html": "<p>Some of the various web projects we have built or assisted with.</p>\n<p>&nbsp;</p>\n<p><strong><a href=\"https://customers.pgttrucking.com/\" target=\"_blank\" rel=\"noopener\">PGT Customer Portal</a></strong></p>\n<p>PGT Customer Portal is an ASP.NET MVC web application that provides access to data stored on an AS400 back-end that customers can use to look at their orders.</p>\n<p><strong><a title=\"RaptorPanel\" href=\"http://www.raptorpanel.com\" target=\"_blank\" rel=\"noopener\">Raptor Panel</a></strong></p>\n<p>RaptorPanel is a minecraft administration panel that uses several public APIs to retrieve and send data.</p>\n"
+}
