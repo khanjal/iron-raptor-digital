@@ -41,6 +41,58 @@
       }
     </div>
 
+    <!-- Agentic engineering -->
+    <div class="card mt-6 md:p-8">
+      <div class="max-w-2xl">
+        <h3 class="text-lg">{{ eng.agentic.heading }}</h3>
+        <p class="mt-3 leading-relaxed text-ink-soft">{{ eng.agentic.body }}</p>
+      </div>
+      <div class="mt-8 overflow-hidden rounded-lg border border-line">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-surface-2 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+            <tr>
+              <th scope="col" class="hidden px-4 py-3 font-medium sm:table-cell"><span class="sr-only">Aspect</span></th>
+              <th scope="col" class="px-4 py-3 font-medium">Vibe coding</th>
+              <th scope="col" class="px-4 py-3 font-medium text-accent">Agentic engineering</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            @for (row of eng.agentic.comparison; track row.aspect) {
+              <tr class="align-top">
+                <th scope="row" class="hidden px-4 py-3 font-medium sm:table-cell sm:w-36">{{ row.aspect }}</th>
+                <td class="px-4 py-3 text-ink-muted">
+                  <span class="mb-1 block text-xs font-medium text-ink sm:hidden">{{ row.aspect }}</span>
+                  {{ row.vibe }}
+                </td>
+                <td class="px-4 py-3 text-ink-soft">
+                  <span class="mb-1 block text-xs font-medium text-ink sm:hidden">&nbsp;</span>
+                  {{ row.agentic }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <ol class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        @for (stage of eng.agentic.stages; track stage.title; let i = $index) {
+          <li class="border-t-2 border-accent pt-5">
+            <span class="font-mono text-sm text-accent">0{{ i + 1 }}</span>
+            <h4 class="mt-2 font-medium">{{ stage.title }}</h4>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{{ stage.body }}</p>
+            <ul class="mt-4 space-y-2.5">
+              @for (point of stage.points; track point) {
+                <li class="flex gap-2.5 text-sm leading-relaxed text-ink-soft">
+                  <app-icon name="check" class="mt-0.5 h-4 w-4 text-accent" />
+                  {{ point }}
+                </li>
+              }
+            </ul>
+          </li>
+        }
+      </ol>
+      <p class="mt-8 border-t border-line pt-6 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">{{ eng.agentic.closing }}</p>
+    </div>
+
     <!-- Open source or private -->
     <div class="card mt-6 grid gap-8 md:p-8 lg:grid-cols-[1fr_2fr] lg:items-center">
       <div>
