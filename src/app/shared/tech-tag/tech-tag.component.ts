@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 
 // Tag label → logo file in public/tech/. Labels without an entry render as text only.
 // Logos come from Devicon (MIT) and Simple Icons (CC0: googlesheets, proxmox, pwa, ubiquiti);
@@ -36,6 +36,7 @@ const LOGOS: Record<string, string> = {
   selector: 'app-tech-tag',
   standalone: true,
   host: { class: 'inline-flex items-center gap-1.5' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if (logo(); as src) {
       <img [src]="src" alt="" width="14" height="14" class="h-3.5 w-3.5 shrink-0 object-contain" />

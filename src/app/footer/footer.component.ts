@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITE_CONFIG } from '../site.config';
 
@@ -7,6 +7,7 @@ import { SITE_CONFIG } from '../site.config';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './footer.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {

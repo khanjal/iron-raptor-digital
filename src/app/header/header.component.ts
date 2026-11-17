@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITE_CONFIG } from '../site.config';
 import { ThemeService } from '../shared/services/theme.service';
@@ -8,6 +8,7 @@ import { ThemeService } from '../shared/services/theme.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {

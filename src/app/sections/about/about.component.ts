@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { SITE_CONFIG } from '../../site.config';
 import { IconComponent } from '../../shared/icon/icon.component';
 
@@ -7,6 +7,7 @@ import { IconComponent } from '../../shared/icon/icon.component';
   standalone: true,
   imports: [IconComponent],
   templateUrl: './about.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './about.component.scss',
 })
 export class AboutComponent {
