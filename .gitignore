@@ -43,3 +43,4 @@ Thumbs.db
 /infra/node_modules
 /infra/cdk.out
 /infra/dist
+.claude/worktrees/
