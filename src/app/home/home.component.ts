@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HeroComponent } from '../sections/hero/hero.component';
 import { ServicesComponent } from '../sections/services/services.component';
 import { WorkComponent } from '../sections/work/work.component';
@@ -12,6 +12,7 @@ import { CtaComponent } from '../sections/cta/cta.component';
   standalone: true,
   imports: [HeroComponent, ServicesComponent, WorkComponent, ApproachComponent, EngineeringComponent, AboutComponent, CtaComponent],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {}

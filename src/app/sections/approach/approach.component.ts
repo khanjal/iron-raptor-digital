@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TechTagComponent } from '../../shared/tech-tag/tech-tag.component';
 import { SITE_CONFIG } from '../../site.config';
 
@@ -6,6 +6,7 @@ import { SITE_CONFIG } from '../../site.config';
   selector: 'app-approach',
   standalone: true,
   imports: [TechTagComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './approach.component.html',
 })
 export class ApproachComponent {

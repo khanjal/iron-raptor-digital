@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITE_CONFIG } from '../../site.config';
 import { IconComponent } from '../../shared/icon/icon.component';
@@ -9,6 +9,7 @@ import { SNIPPETS, highlight } from './snippets';
   standalone: true,
   imports: [RouterLink, IconComponent],
   templateUrl: './hero.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {

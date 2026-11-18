@@ -4,6 +4,11 @@ on:
   push:
   pull_request:
 
+# A new push to a pull request cancels the run on the commit it replaced.
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('ci-pr-{0}', github.head_ref) || format('ci-run-{0}', github.run_id) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 # Opt into Node.js 24 for JavaScript actions to avoid Node 20 deprecation issues
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -14,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['20.x']
+        node-version: ['22.x']
 
     steps:
       - uses: actions/checkout@v4

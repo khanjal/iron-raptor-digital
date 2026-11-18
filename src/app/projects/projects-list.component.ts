@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TechTagComponent } from '../shared/tech-tag/tech-tag.component';
 import { SITE_CONFIG } from '../site.config';
 import { IconComponent } from '../shared/icon/icon.component';
@@ -9,6 +9,7 @@ import { CtaComponent } from '../sections/cta/cta.component';
   standalone: true,
   imports: [IconComponent, CtaComponent, TechTagComponent],
   templateUrl: './projects-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './projects-list.component.scss',
 })
 export class ProjectsListComponent {

@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 
 // Outline icons (24×24, 1.5 stroke). Each entry is one or more path `d` strings.
 const ICONS = {
@@ -26,6 +26,7 @@ export type IconName = keyof typeof ICONS;
   selector: 'app-icon',
   standalone: true,
   host: { class: 'inline-flex shrink-0', 'aria-hidden': 'true' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <svg class="h-full w-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
       @for (d of paths(); track $index) {

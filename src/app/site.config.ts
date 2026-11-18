@@ -91,6 +91,13 @@ export interface SiteConfig {
     stats: Highlight[];
     statsNote: string;
     practices: Practice[];
+    agentic: {
+      heading: string;
+      body: string;
+      comparison: { aspect: string; vibe: string; agentic: string }[];
+      stages: Omit<Practice, 'icon'>[];
+      closing: string;
+    };
     visibility: {
       heading: string;
       body: string;
@@ -249,6 +256,56 @@ export const SITE_CONFIG: SiteConfig = {
         ],
       },
     ],
+    // How AI fits into the work, step by step. Keep it to what we actually do.
+    agentic: {
+      heading: 'Agentic engineering, not vibe coding',
+      body:    'Vibe coding means accepting whatever a model writes and hoping it works. We use AI agents the way a well-run team uses a fast new engineer: inside a project set up for them, under rules they cannot skip, and with nothing merged until the tests prove it and a person has read it.',
+      comparison: [
+        { aspect: 'Done means',  vibe: 'It runs on my machine',             agentic: 'It is tested, secure, and fits the architecture' },
+        { aspect: 'Code review', vibe: 'Little or none',                    agentic: 'Two model reviews and a person, on every pull request' },
+        { aspect: 'History',     vibe: 'One big change, reason unknown',    agentic: 'Small commits tied to an issue and a release' },
+        { aspect: 'Over time',   vibe: 'Breaks down as the project grows',  agentic: 'Built for long-term growth and hand-offs' },
+      ],
+      stages: [
+        {
+          title: 'Set up the project',
+          body:  'Before an agent writes a line, the repository explains itself.',
+          points: [
+            'Instruction files describe the architecture, conventions, and commands',
+            'Project skills turn recurring jobs like reviews and releases into written steps',
+            'Linters, type checks, and quality rules define what correct looks like',
+          ],
+        },
+        {
+          title: 'Put up guardrails',
+          body:  'Agents get the access a task needs and no more.',
+          points: [
+            'Work happens on a branch; main only changes through a pull request',
+            'Anything that publishes, deploys, or deletes waits for a person to approve it',
+            'APIs are checked against the real library, not guessed from memory',
+          ],
+        },
+        {
+          title: 'Keep it maintainable',
+          body:  'Code has to make sense to the next person, or the next agent, who opens it.',
+          points: [
+            'Common patterns and the style already in the codebase, not clever one-offs',
+            'Small, focused pull requests that say why the change was made',
+            'Docs and instruction files updated in the same change',
+          ],
+        },
+        {
+          title: 'Prove it works',
+          body:  'Passing once on one machine is not proof.',
+          points: [
+            'Tests written with the change, using the kinds that fit the project',
+            'Mutation checks confirm the tests would catch a break',
+            'Reviewed by a second model and by a person before it merges',
+          ],
+        },
+      ],
+      closing: 'The agent drafts. The engineer decides, and owns the result.',
+    },
     visibility: {
       heading: 'Open source or private, your call',
       body: 'Client projects are private unless you choose otherwise. The process is the same either way; only where it runs changes.',
